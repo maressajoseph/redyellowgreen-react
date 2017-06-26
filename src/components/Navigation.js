@@ -9,30 +9,38 @@ import Heart from 'material-ui/svg-icons/action/favorite-border'
 import FlatButton from 'material-ui/FlatButton'
 
 class Navigation extends PureComponent {
-  // ...
-
-  signUp() {
-    this.props.push('/sign-up')
+  static propTypes = {
+    signedIn: PropTypes.bool,
+    push: PropTypes.func.isRequired,
+    signOut: PropTypes.func.isRequired,
   }
 
-  goHome() {
+
+  signIn = () => {
+    this.props.push('/sign-in')
+  }
+
+  goHome = () => {
     this.props.push('/')
   }
 
   render() {
-    const { signedIn } = this.props
+    const { signedIn, signOut } = this.props
     return (
       <AppBar
         title="REDYELLOWGREEN"
         iconElementLeft={<IconButton onClick={this.goHome}><Heart /></IconButton>}
         iconElementRight={signedIn ?
-          <FlatButton label="Sign out" onClick={this.signOut.bind(this)} /> :
+          <FlatButton label="Sign out" onClick={signOut} /> :
           <FlatButton label="Sign in" onClick={this.signIn} />
         }
       />
     )
   }
+}
 
-const mapStateToProps = // ...
+const mapStateToProps = ({ currentUser }) => ({
+    signedIn: !!currentUser && !!currentUser._id,
+  })
 
-export default connect(mapStateToProps, { push })(Navigation)
+export default connect(mapStateToProps, { push, signOut })(Navigation)

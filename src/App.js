@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './assets/styles/theme'
+import Navigation from './components/Navigation'
+import LoadErrorMessage from './components/LoadErrorMessage'
 
 
 class App extends PureComponent {
@@ -17,7 +19,9 @@ class App extends PureComponent {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div className="App">
-          <h1>Hi</h1>
+          <Navigation />
+          <LoadErrorMessage />
+          { this.props.children }
         </div>
       </MuiThemeProvider>
     );
