@@ -5,4 +5,5 @@ import subscriptions from './subscriptions'
 export default {
   batches,
   currentUser,
+  subscriptions,
 }

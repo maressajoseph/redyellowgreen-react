@@ -12,11 +12,12 @@ export class AllBatches extends PureComponent {
     batches: PropTypes.array.isRequired,
     fetchBatches: PropTypes.func.isRequired,
     subscribeToBatchesService: PropTypes.func.isRequired,
+    signedIn: PropTypes.bool,
   }
 
   componentWillMount() {
-    this.props.fetchBatches()
     const { subscribed } = this.props
+    this.props.fetchBatches()
     if (!subscribed) this.props.subscribeToBatchesService()
   }
 
@@ -26,20 +27,27 @@ export class AllBatches extends PureComponent {
   }
 
   render() {
-    return (
-      <div>
-        <header>
-          <CreateBatchButton />
-        </header>
-        <main>
-          { this.props.batches.map(this.renderBatch.bind(this)) }
-        </main>
-      </div>
-    )
+    if (this.props.signedIn) {
+      return (
+        <div>
+          <header>
+            <CreateBatchButton />
+          </header>
+          <main>
+            { this.props.batches.map(this.renderBatch.bind(this)) }
+          </main>
+        </div>
+      )
+    }
+    return null
   }
 }
 
-const mapStateToProps = ({ currentUser, currentBatch, batches, subscriptions }) => ({ currentUser, currentBatch, batches, subscribed: subscriptions.includes('batches') })
+const mapStateToProps = ({ currentUser, currentBatch, batches, subscriptions }) => ({
+  signedIn: (!!currentUser && !!currentUser._id),
+  currentBatch,
+  batches,
+  subscribed: subscriptions.includes('batches') })
 
 export default connect(mapStateToProps, {
   fetchBatches, subscribeToBatchesService

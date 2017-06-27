@@ -6,34 +6,34 @@ export const BATCH_UPDATED = 'BATCH_UPDATED'
 export const BATCH_REMOVED = 'BATCH_REMOVED'
 
 const api = new API()
-const batchs = api.service('batches')
+const batches = api.service('batches')
 
 export default () => {
   return (dispatch) => {
-    batches.on('created', (batch) => { dispatch(createdGame(batch)) })
-    batches.on('updated', (batch) => { dispatch(updatedGame(batch)) })
-    batches.on('patched', (batch) => { dispatch(updatedGame(batch)) })
-    batches.on('removed', (batch) => { dispatch(removedGame(batch)) })
+    batches.on('created', (batch) => { dispatch(createdBatch(batch)) })
+    batches.on('updated', (batch) => { dispatch(updatedBatch(batch)) })
+    batches.on('patched', (batch) => { dispatch(updatedBatch(batch)) })
+    batches.on('removed', (batch) => { dispatch(removedBatch(batch)) })
 
     dispatch({ type: SUBSCRIBED_TO_BATCHES_SERVICE })
   }
 }
 
-const createdGame = (batch) => {
+const createdBatch = (batch) => {
   return {
     type: BATCH_CREATED,
     payload: batch
   }
 }
 
-const updatedGame = (batch) => {
+const updatedBatch = (batch) => {
   return {
     type: BATCH_UPDATED,
     payload: batch
   }
 }
 
-const removedGame = (batch) => {
+const removedBatch = (batch) => {
   return {
     type: BATCH_REMOVED,
     payload: batch
