@@ -54,6 +54,13 @@ updateStarts(event) {
     })
   }
 
+  updateStudents(event) {
+    event.preventDefault()
+    this.setState({
+      students: this.refs.students.value
+    })
+  }
+
 
   validate(batch) {
     const { number, starts, ends } = batch
@@ -97,13 +104,12 @@ updateStarts(event) {
     return (
       <div className="editor">
         <input
-          type="number"
+          type="text"
           ref="number"
           className="number"
           placeholder="Batch Number"
           defaultValue={this.state.number}
-          onChange={this.updateNumber.bind(this)}
-          onKeyDown={this.updateNumber.bind(this)} />
+          onChange={this.updateNumber.bind(this)} />
 
         { errors.title && <p className="error">{ errors.number }</p> }
 
@@ -113,8 +119,7 @@ updateStarts(event) {
           className="starts"
           placeholder="Start date of this batch"
           defaultValue={this.state.starts}
-          onChange={this.updateStarts.bind(this)}
-          onKeyDown={this.updateStarts.bind(this)} />
+          onChange={this.updateStarts.bind(this)} />
 
         { errors.starts && <p className="error">{ errors.starts }</p> }
 
@@ -124,10 +129,17 @@ updateStarts(event) {
           className="ends"
           placeholder="End date of this batch"
           defaultValue={this.state.ends}
-          onChange={this.updateEnds.bind(this)}
-          onKeyDown={this.updateEnds.bind(this)} />
+          onChange={this.updateEnds.bind(this)} />
 
         { errors.ends && <p className="error">{ errors.ends }</p> }
+
+        <input
+          type="text"
+          ref="students"
+          className="students"
+          placeholder="Add students"
+          defaultValue={this.state.students}
+          onChange={this.updateStudents.bind(this)} />
 
 
         <div className="actions">

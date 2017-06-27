@@ -8,7 +8,7 @@ import registerServiceWorker from './registerServiceWorker'
 import { Provider } from 'react-redux'
 import SignIn from './users/SignIn'
 import AllBatches from './batches/AllBatches'
-import Batch from './batches/Batch'
+import BatchPage from './batches/BatchPage'
 import AddBatch from './batches/AddBatch'
 import './index.css'
 
@@ -20,7 +20,7 @@ ReactDOM.render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={AllBatches} />
-        <Route path="/batches/:batchId" component={Batch} />
+        <Route path="/batches/:batchId" component={BatchPage} />
         <Route path="/create-batch" component={AddBatch} />
         <Route path="/sign-in" component={SignIn} />
       </Route>

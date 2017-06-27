@@ -28,7 +28,7 @@ export class Batch extends PureComponent {
             <Link to={`/batches/${_id}`}>Batch { number }</Link>
           </h1>
           <p className="starts">Starts: { starts }</p>
-          <p className="ends">Starts: { ends }</p>
+          <p className="ends">Ends: { ends }</p>
         </header>
       </article>
     )
