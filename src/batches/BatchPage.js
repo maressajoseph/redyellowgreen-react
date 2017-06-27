@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import fetchBatch from '../actions/batches/fetch'
+import AskQuestionButton from '../components/AskQuestionButton'
+import getCurrentBatch from '../actions/batches/get'
+import './BatchPage.css'
 
 export class BatchPage extends PureComponent {
   static propTypes = {
@@ -13,15 +15,17 @@ export class BatchPage extends PureComponent {
   }
 
   componentWillMount() {
-    this.props.fetchBatch()
+    const { _id } = this.props
+    const { getCurrentBatch } = this.props
+    getCurrentBatch(_id)
   }
 
   renderStudents(student, index) {
-    console.log(student)
     return (
       <div key={index} className="student">
         {student.name && <h3>{student.name}</h3>}
         {student.photo && <img src={student.photo} />}
+        {student.evaluation[0].color && <div className={`red${student.evaluation[0].color === 'Red' ? '' : (student.evaluation[0].color === 'Yellow' ? 'orange': 'green')}`}></div>}
       </div>
     )
   }
@@ -43,16 +47,19 @@ export class BatchPage extends PureComponent {
           <h1>Batch: { number } </h1>
           <p className="starts">Starts: { starts }</p>
           <p className="ends">Ends: { ends }</p>
+          <div className="red"></div>
         </header>
         <main>
           {students.map(this.renderStudents)}
         </main>
+        <AskQuestionButton />
       </article>
     )
   }
 }
 
-const mapStateToProps = ({ batches }, { params }) => {
+const mapStateToProps = ({ batches, currentBatch }, { params }) => {
+
   const batch = batches.reduce((prev, next) => {
     if (next._id === params.batchId) {
       return next
@@ -65,4 +72,4 @@ const mapStateToProps = ({ batches }, { params }) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchBatch })(BatchPage)
+export default connect(mapStateToProps, { getCurrentBatch })(BatchPage)

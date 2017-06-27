@@ -1,0 +1,9 @@
+.red {
+  height: 7px;
+  width: 7px;
+  background-color: red;
+  border-radius: 50%; }
+  .red.orange {
+    background-color: orange; }
+  .red.green {
+    background-color: green; }
