@@ -10,7 +10,7 @@ export const ADD_STUDENT = 'ADD_STUDENT'
 
 const api = new API()
 
-export default (_id) => {
+export default (_id, student) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
@@ -19,7 +19,7 @@ export default (_id) => {
     api.app.authenticate()
       .then(() => {
 
-        backend.patch(_id, { add: true })
+        backend.patch(_id, student)
           .then((result) => {
             dispatch({ type: APP_DONE_LOADING })
             dispatch({ type: LOAD_SUCCESS })

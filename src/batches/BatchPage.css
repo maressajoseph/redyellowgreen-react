@@ -3,7 +3,21 @@
   width: 7px;
   background-color: red;
   border-radius: 50%; }
-  .red.orange {
-    background-color: orange; }
-  .red.green {
-    background-color: green; }
+
+.yellow {
+  background-color: yellow;
+  height: 7px;
+  width: 7px;
+  border-radius: 50%; }
+
+.green {
+  background-color: green;
+  height: 7px;
+  width: 7px;
+  border-radius: 50%; }
+
+.grey {
+  background-color: grey;
+  height: 7px;
+  width: 7px;
+  border-radius: 50%; }

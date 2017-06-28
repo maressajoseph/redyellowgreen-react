@@ -23,7 +23,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={AllBatches} />
         <Route path="/batches/:batchId" component={BatchPage} />
-        <Route path="/batches/:batchId/students/:studentId" component={StudentPage} />
+        <Route path="/batches/:batchId/:studentId" component={StudentPage} />
         <Route path="/create-batch" component={AddBatch} />
         <Route path="/add-student" component={AddStudent} />
         <Route path="/sign-in" component={SignIn} />
