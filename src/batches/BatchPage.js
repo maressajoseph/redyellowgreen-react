@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import AskQuestionButton from '../components/AskQuestionButton'
+import AddStudentButton from '../components/AddStudentButton'
 import getCurrentBatch from '../actions/batches/get'
 import './BatchPage.css'
 
@@ -21,11 +23,12 @@ export class BatchPage extends PureComponent {
   }
 
   renderStudents(student, index) {
+    const { _id } = this.props
     return (
       <div key={index} className="student">
-        {student.name && <h3>{student.name}</h3>}
-        {student.photo && <img src={student.photo} />}
-        {student.evaluation[0].color && <div className={`red${student.evaluation[0].color === 'Red' ? '' : (student.evaluation[0].color === 'Yellow' ? 'orange': 'green')}`}></div>}
+        {student.name && <h3><Link to ={`/batches/${_id}/students/${student._id}`}>{student.name}</Link></h3>}
+        {student.photo && <Link to ={`/batches/${_id}/students/${student._id}`}><img src={student.photo} /></Link>}
+        {student.evaluation[student.evaluation.length-1].color && <div className={`red${student.evaluation[student.evaluation.length-1].color === 'Red' ? '' : (student.evaluation[student.evaluation.length-1].color === 'Yellow' ? 'orange': 'green')}`}></div>}
       </div>
     )
   }
@@ -47,12 +50,12 @@ export class BatchPage extends PureComponent {
           <h1>Batch: { number } </h1>
           <p className="starts">Starts: { starts }</p>
           <p className="ends">Ends: { ends }</p>
-          <div className="red"></div>
         </header>
         <main>
-          {students.map(this.renderStudents)}
+          {students.map(this.renderStudents.bind(this))}
         </main>
         <AskQuestionButton />
+        <AddStudentButton />
       </article>
     )
   }

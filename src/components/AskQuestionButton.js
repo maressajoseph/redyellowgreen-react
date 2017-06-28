@@ -12,21 +12,33 @@ class AskQuestionButton extends PureComponent {
 
   randomStudent = () => {
     const { batch } = this.props
+
     const randomNumber = () => {
-      let redStudents = batch.students.filter((student) => {
-        return student.evaluation[0].color === "Red" })
-      let yellowStudents = batch.students.filter((student) => {
-        return student.evaluation[0].color === "Yellow" })
-      let greenStudents = batch.students.filter((student) => {
-        return student.evaluation[0].color === "Green" })
-      console.log(redStudents)
-      console.log(yellowStudents)
-      console.log(greenStudents)
       return Math.floor(Math.random()*(batch.students.length))
     }
-    window.alert(batch.students[randomNumber()].name)
-  }
 
+    const algorithm = () => {
+      let redStudents = batch.students.filter((student) => {
+        return student.evaluation[student.evaluation.length-1].color === "Red" })
+      let yellowStudents = batch.students.filter((student) => {
+        return student.evaluation[student.evaluation.length-1].color === "Yellow" })
+      let greenStudents = batch.students.filter((student) => {
+        return student.evaluation[student.evaluation.length-1].color === "Green" })
+
+      if (Math.floor(Math.random()*6) === 0 || 1 || 2) {
+        return window.alert(redStudents[randomNumber()].name)
+      }
+
+      if (Math.floor(Math.random()*6) === 3 || 4) {
+        return window.alert(yellowStudents[randomNumber()].name)
+      }
+
+      if (Math.floor(Math.random()*6) === 5) {
+        return window.alert(greenStudents[randomNumber()].name)
+      }
+    }
+    algorithm()
+  }
 
   render() {
       return (
