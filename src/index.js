@@ -9,7 +9,9 @@ import { Provider } from 'react-redux'
 import SignIn from './users/SignIn'
 import AllBatches from './batches/AllBatches'
 import BatchPage from './batches/BatchPage'
+import StudentPage from './batches/StudentPage'
 import AddBatch from './batches/AddBatch'
+import AddStudent from './batches/AddStudent'
 import './index.css'
 
 injectTapEventPlugin()
@@ -21,7 +23,9 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={AllBatches} />
         <Route path="/batches/:batchId" component={BatchPage} />
+        <Route path="/batches/:batchId/students/:studentId" component={StudentPage} />
         <Route path="/create-batch" component={AddBatch} />
+        <Route path="/add-student" component={AddStudent} />
         <Route path="/sign-in" component={SignIn} />
       </Route>
     </Router>

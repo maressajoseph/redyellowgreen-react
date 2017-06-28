@@ -1,7 +1,11 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import fetchBatch from '../actions/batches/fetch'
+import { Link } from 'react-router'
+import AskQuestionButton from '../components/AskQuestionButton'
+import AddStudentButton from '../components/AddStudentButton'
+import getCurrentBatch from '../actions/batches/get'
+import './BatchPage.css'
 
 export class BatchPage extends PureComponent {
   static propTypes = {
@@ -13,15 +17,18 @@ export class BatchPage extends PureComponent {
   }
 
   componentWillMount() {
-    this.props.fetchBatch()
+    const { _id } = this.props
+    const { getCurrentBatch } = this.props
+    getCurrentBatch(_id)
   }
 
   renderStudents(student, index) {
-    console.log(student)
+    const { _id } = this.props
     return (
       <div key={index} className="student">
-        {student.name && <h3>{student.name}</h3>}
-        {student.photo && <img src={student.photo} />}
+        {student.name && <h3><Link to ={`/batches/${_id}/students/${student._id}`}>{student.name}</Link></h3>}
+        {student.photo && <Link to ={`/batches/${_id}/students/${student._id}`}><img src={student.photo} /></Link>}
+        {student.evaluation[student.evaluation.length-1].color && <div className={`red${student.evaluation[student.evaluation.length-1].color === 'Red' ? '' : (student.evaluation[student.evaluation.length-1].color === 'Yellow' ? 'orange': 'green')}`}></div>}
       </div>
     )
   }
@@ -45,14 +52,17 @@ export class BatchPage extends PureComponent {
           <p className="ends">Ends: { ends }</p>
         </header>
         <main>
-          {students.map(this.renderStudents)}
+          {students.map(this.renderStudents.bind(this))}
         </main>
+        <AskQuestionButton />
+        <AddStudentButton />
       </article>
     )
   }
 }
 
-const mapStateToProps = ({ batches }, { params }) => {
+const mapStateToProps = ({ batches, currentBatch }, { params }) => {
+
   const batch = batches.reduce((prev, next) => {
     if (next._id === params.batchId) {
       return next
@@ -65,4 +75,4 @@ const mapStateToProps = ({ batches }, { params }) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchBatch })(BatchPage)
+export default connect(mapStateToProps, { getCurrentBatch })(BatchPage)
