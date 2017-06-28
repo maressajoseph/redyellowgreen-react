@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import getCurrentBatch from '../actions/batches/get'
+import AddEvaluation from './AddEvaluation'
 
 export class StudentPage extends PureComponent {
   static propTypes = {
@@ -18,9 +19,7 @@ export class StudentPage extends PureComponent {
   renderEvaluations(evaluation, index) {
     return (
       <div key={index} className="evaluation">
-        <h3>{evaluation.day}</h3>
-        <h3>{evaluation.color}</h3>
-        <h3>{evaluation.remark}</h3>
+        <div className={`${evaluation.color === 'Red' ? 'red' : (evaluation.color === 'Yellow' ? 'yellow' : 'green')}`}></div>
       </div>
     )
   }
@@ -38,9 +37,11 @@ export class StudentPage extends PureComponent {
     return(
       <article className="student page">
         <main>
-          {student.name}
-          {student.photo}
+          <h3>{student.name}</h3>
+          <img src={student.photo} />
+          <p>Evaluation history: </p>
           {student.evaluation.map(this.renderEvaluations.bind(this))}
+          <AddEvaluation />
         </main>
       </article>
     )
