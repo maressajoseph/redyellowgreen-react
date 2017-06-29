@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react'
-import Editor from 'react-medium-editor'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
 import { push } from 'react-router-redux'
-import PropTypes from 'prop-types'
 import addStudent from '../actions/batches/add-student'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
@@ -72,7 +70,7 @@ class AddStudent extends PureComponent {
       name,
       photo
     }
-    const { currentBatch, push } = this.props
+    const { currentBatch } = this.props
 
     if (this.validate(student)) {
       this.props.addStudent(currentBatch._id, student)

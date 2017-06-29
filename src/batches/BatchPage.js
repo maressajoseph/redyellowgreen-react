@@ -18,7 +18,7 @@ export class BatchPage extends PureComponent {
 
   componentWillMount() {
     const { _id } = this.props
-    const { getCurrentBatch, currentBatch } = this.props
+    const { getCurrentBatch } = this.props
     getCurrentBatch(_id)
   }
 
@@ -28,7 +28,7 @@ export class BatchPage extends PureComponent {
     return (
       <div key={index} className="student">
         <h3><Link to ={`/batches/${_id}/${student._id}`}>{student.name}</Link></h3>
-        {student.photo && <Link to ={`/batches/${_id}/${student._id}`}><img src={student.photo} /></Link>}
+        {student.photo && <Link to ={`/batches/${_id}/${student._id}`}><img src={student.photo} alt="studentphoto"/></Link>}
         {student.evaluation[0] === undefined ? (<div className="grey"></div>) : (<div className={`${student.evaluation[student.evaluation.length-1].color === 'Red' ? 'red' : (student.evaluation[student.evaluation.length-1].color === 'Yellow' ? 'yellow': 'green')}`}></div>)}
       </div>
     )

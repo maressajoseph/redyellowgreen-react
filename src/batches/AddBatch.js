@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import Editor from 'react-medium-editor'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
 import createBatch from '../actions/batches/create'

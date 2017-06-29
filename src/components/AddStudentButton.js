@@ -16,9 +16,9 @@ class AddStudentButton extends PureComponent {
     const { signedIn } = this.props
     if (signedIn)
       return (
-          <button className="AddStudentButton">
+          <RaisedButton className="AddStudentButton" icon={<AddIcon/>}>
             <Link to={'/add-student'}>Add student</Link>
-          </button>
+          </RaisedButton>
       )
       else {
         return null

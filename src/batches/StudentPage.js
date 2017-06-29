@@ -13,8 +13,8 @@ export class StudentPage extends PureComponent {
   }
 
   componentWillMount() {
-    const { _id, students } = this.props
-    const { getCurrentBatch, currentBatch } = this.props
+    const { _id } = this.props
+    const { getCurrentBatch } = this.props
     getCurrentBatch(_id)
   }
 
@@ -44,9 +44,10 @@ export class StudentPage extends PureComponent {
           <button className="EditStudentButton">
             <Link to={`/edit-student/${student._id}`}>Edit student</Link>
           </button>
-          <img src={student.photo} />
+          <img src={student.photo} alt="studentphoto" />
           <p>Evaluation history: </p>
           {student.evaluation.map(this.renderEvaluations.bind(this))}
+          <Link to={`/edit-evaluation/${student._id}`}>Edit your last evaluation</Link>
           <AddEvaluation />
         </main>
       </article>

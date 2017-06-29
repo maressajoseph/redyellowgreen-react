@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { history } from '../store'
-import addEvaluation from '../actions/batches/add-evaluation'
-import addNextEvaluation from '../actions/batches/addnext-evaluation'
+import editEvaluation from '../actions/batches/edit-evaluation'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
@@ -13,14 +12,13 @@ const COLORS = [
   'Green'
 ]
 
-class AddEvaluation extends PureComponent {
+class EditEvaluation extends PureComponent {
   constructor(props) {
     super()
 
-    const { day, color, remark } = props
+    const { color, remark } = props
 
     this.state = {
-      day,
       color,
       remark,
       errors: {},
@@ -35,13 +33,6 @@ class AddEvaluation extends PureComponent {
     }
   }
 
-
-  updateDay(event) {
-    this.setState({
-      day: this.refs.day.value
-    })
-  }
-
   updateRemark(event) {
     this.setState({
       remark: this.refs.remark.value
@@ -50,17 +41,16 @@ class AddEvaluation extends PureComponent {
 
   setType(event) {
   this.setState({
-    color: event.target.value
+    color: event.target.value,
   })
 }
 
 
   validate(evaluation) {
-    const { day, color } = evaluation
+    const { color } = evaluation
 
     let errors = {}
 
-    if (!day || day === '') errors.day = "Please add a day of the evaluation"
     if (!color || color === '') errors.color = 'Please add a color for this evaluation'
 
     this.setState({
@@ -72,13 +62,11 @@ class AddEvaluation extends PureComponent {
 
   saveEvaluation() {
     const {
-      day,
       color,
       remark,
     } = this.state
 
     const evaluation = {
-      day,
       color,
       remark,
     }
@@ -86,7 +74,7 @@ class AddEvaluation extends PureComponent {
     const { currentBatch } = this.props
 
     if (this.validate(evaluation)) {
-      this.props.addEvaluation(currentBatch._id, evaluation)
+      this.props.editEvaluation(currentBatch._id, evaluation)
     }
   }
 
@@ -130,19 +118,9 @@ class AddEvaluation extends PureComponent {
   }
 
   render() {
-    const { errors } = this.state
 
     return (
       <div className="editor">
-        <input
-          type="date"
-          ref="day"
-          className="day"
-          placeholder="Day of the evaluation"
-          onChange={this.updateDay.bind(this)} /><br />
-
-        { errors.day && <p className="error">{ errors.day }</p> }
-
         {COLORS.map((color) => {
           return <label key={color} htmlFor={color}>
             <input id={color} type="radio" name="color" value={color} onChange={this.setType.bind(this)} />
@@ -154,12 +132,11 @@ class AddEvaluation extends PureComponent {
             type="text"
             ref="remark"
             className="remark"
-            placeholder="Write your remark here"
+            placeholder="Write your new remark for this evaluation here"
             onChange={this.updateRemark.bind(this)} />
 
         <div className="actions">
           <button className="primary" onClick={this.saveEvaluation.bind(this)}>Save</button>
-          <button className="primary" onClick={this.savenextEvaluation.bind(this)}>Save & Next</button>
         </div>
       </div>
     )
@@ -171,4 +148,4 @@ const mapStateToProps = ({ currentUser, currentBatch, routing}) => ({
   currentBatch,
   routing
 })
-export default connect(mapStateToProps, { addEvaluation, addNextEvaluation, showError })(AddEvaluation)
+export default connect(mapStateToProps, { editEvaluation, showError })(EditEvaluation)
