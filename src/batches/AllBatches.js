@@ -30,11 +30,9 @@ export class AllBatches extends PureComponent {
     if (this.props.signedIn) {
       return (
         <div>
-          <header>
-            <CreateBatchButton />
-          </header>
           <main>
             { this.props.batches.map(this.renderBatch.bind(this)) }
+            <CreateBatchButton />
           </main>
         </div>
       )

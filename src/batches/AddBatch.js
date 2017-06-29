@@ -1,11 +1,24 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
+import DatePicker from 'material-ui/DatePicker'
 import createBatch from '../actions/batches/create'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
 import './AddBatch.css'
+
+const Calendarstart = () => (
+  <div>
+    <DatePicker hintText="Start date of the batch" okLabel="Pick date" container="inline" onChange={(x, event) => this.updateStarts(x, event)} />
+  </div>
+)
+
+const Calendarend = () => (
+  <div>
+    <DatePicker hintText="End date of the batch" okLabel="Pick date" container="inline" onChange={(x, event) => this.updateEnds(x, event)} />
+  </div>
+)
 
 class AddBatch extends PureComponent {
   constructor(props) {
@@ -31,18 +44,16 @@ class AddBatch extends PureComponent {
   }
 
 
-updateEnds(event) {
-  event.preventDefault()
+updateEnds(event, x) {
   this.setState({
-    ends: this.refs.ends.value
+    ends: x
   })
 }
 
 
-updateStarts(event) {
-  event.preventDefault()
+updateStarts(event, x) {
   this.setState({
-    starts: this.refs.starts.value
+    starts: x
   })
 }
 
@@ -93,6 +104,8 @@ updateStarts(event) {
   render() {
     const { errors } = this.state
 
+    console.log(Calendarstart)
+
     return (
       <div className="editor">
         <input
@@ -100,28 +113,15 @@ updateStarts(event) {
           ref="number"
           className="number"
           placeholder="Batch Number"
-          defaultValue={this.state.number}
           onChange={this.updateNumber.bind(this)} />
 
         { errors.title && <p className="error">{ errors.number }</p> }
 
-        <input
-          type="date"
-          ref="starts"
-          className="starts"
-          placeholder="Start date of this batch"
-          defaultValue={this.state.starts}
-          onChange={this.updateStarts.bind(this)} />
+        <DatePicker hintText="Start date of the batch" okLabel="Pick date" container="inline" onChange={(event, x) => this.updateStarts(event, x)} />
 
         { errors.starts && <p className="error">{ errors.starts }</p> }
 
-        <input
-          type="date"
-          ref="ends"
-          className="ends"
-          placeholder="End date of this batch"
-          defaultValue={this.state.ends}
-          onChange={this.updateEnds.bind(this)} />
+        <DatePicker hintText="End date of the batch" okLabel="Pick date" container="inline" onChange={(event, x) => this.updateEnds(event, x)} />
 
         { errors.ends && <p className="error">{ errors.ends }</p> }
 

@@ -1,38 +1,41 @@
 .red {
-  height: 7px;
-  width: 7px;
-  background-color: red;
-  border-radius: 50%; }
+  color: red; }
 
 .yellow {
-  background-color: yellow;
-  height: 7px;
-  width: 7px;
-  border-radius: 50%; }
+  color: yellow; }
 
 .green {
-  background-color: green;
-  height: 7px;
-  width: 7px;
-  border-radius: 50%; }
+  color: green; }
 
 .grey {
-  background-color: grey;
-  height: 7px;
-  width: 7px;
-  border-radius: 50%; }
+  color: grey; }
+
+.try {
+  display: flex;
+  text-align: center; }
 
 .redbar {
-  background-color: red;
-  height: 15px;
-  width: 15px; }
+  color: red;
+  font-size: 25px;
+  flex: 1; }
 
 .yellowbar {
-  background-color: yellow;
-  height: 15px;
-  width: 15px; }
+  color: yellow;
+  font-size: 25px;
+  flex: 1; }
 
 .greenbar {
-  background-color: green;
-  height: 15px;
-  width: 15px; }
+  color: green;
+  font-size: 25px;
+  flex: 1; }
+
+.batch-page {
+  margin: 20px;
+  background-color: rgba(251, 251, 251, 0.8);
+  padding: 20px; }
+
+.batchnumber {
+  text-align: center; }
+
+.dates {
+  text-align: center; }

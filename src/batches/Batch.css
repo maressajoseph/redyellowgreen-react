@@ -1,0 +1,13 @@
+.link {
+  text-decoration: none;
+  color: black; }
+
+.batches {
+  background-color: rgba(251, 251, 251, 0.8);
+  padding: 10px;
+  margin: 10px;
+  display: flex; }
+
+.batch {
+  float: left;
+  width: 500px; }

@@ -3,6 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import moment from 'moment'
+import Avatar from 'material-ui/Avatar'
+import List from 'material-ui/List/List'
+import ListItem from 'material-ui/List/ListItem'
+import { history } from '../store'
 import AskQuestionButton from '../components/AskQuestionButton'
 import AddStudentButton from '../components/AddStudentButton'
 import getCurrentBatch from '../actions/batches/get'
@@ -26,11 +30,15 @@ export class BatchPage extends PureComponent {
   renderStudents(student, index) {
     const { _id } = this.props
 
+    const gotoStudent = () => {
+      history.push(`/batches/${_id}/${student._id}`)
+    }
+
     return (
       <div key={index} className="student">
-        <h3><Link to ={`/batches/${_id}/${student._id}`}>{student.name}</Link></h3>
-        {student.photo && <Link to ={`/batches/${_id}/${student._id}`}><img src={student.photo} alt="studentphoto"/></Link>}
-        {student.evaluation[0] === undefined ? (<div className="grey"></div>) : (<div className={`${student.evaluation[student.evaluation.length-1].color === 'Red' ? 'red' : (student.evaluation[student.evaluation.length-1].color === 'Yellow' ? 'yellow': 'green')}`}></div>)}
+        <ListItem onClick={gotoStudent} leftAvatar={<Avatar src={student.photo} />}>
+          {student.name} {student.evaluation[0] === undefined ? (<div className="grey">{'\u2605'}</div>) : (<div className={`${student.evaluation[student.evaluation.length-1].color === 'Red' ? 'red' : (student.evaluation[student.evaluation.length-1].color === 'Yellow' ? 'yellow': 'green')}`}>{'\u2605'}</div>)}
+        </ListItem>
       </div>
     )
   }
@@ -70,12 +78,15 @@ export class BatchPage extends PureComponent {
     if (!_id) return null
 
     return(
-      <article className="batch page">
+      <article className="batch-page">
         <header>
-          <h1>Batch: { number } </h1>
-          <div className='redbar'></div>{redper}%<div className='yellowbar'></div>{yellowper}%<div className='greenbar'></div>{greenper}%
-          <p className="starts">Start date: { moment(starts).format('DD-MM-YYYY') }</p>
-          <p className="ends">End date: { moment(ends).format('DD-MM-YYYY') }</p>
+          <h1 className="batchnumber">Batch number { number } </h1>
+          <p className="dates">{ moment(starts).format('Do MMMM YYYY') } - { moment(ends).format('Do MMMM YYYY') } </p>
+          <div className="try">
+            <div className='redbar'>{'\u2605'} {Math.floor(redper)}%</div><div className='yellowbar'>{'\u2605'} {Math.floor(yellowper)}%</div><div className='greenbar'>{'\u2605'} {Math.floor(greenper)}%</div>
+          </div>
+
+
         </header>
         <main>
           {students.map(this.renderStudents.bind(this))}
