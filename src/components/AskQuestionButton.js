@@ -52,7 +52,7 @@ class AskQuestionButton extends PureComponent {
         }
       }
 
-      if ((redStudents.length = 0) && (yellowStudents.length > 0) && (greenStudents.length > 0)) {
+      else if ((redStudents.length === 0) && (yellowStudents.length > 0) && (greenStudents.length > 0)) {
 
         if (num === 3 || num === 0 || num === 1 || num === 2) {
           return window.alert(yellowStudents[yellowrandomNumber].name)
@@ -62,7 +62,7 @@ class AskQuestionButton extends PureComponent {
         }
       }
 
-      if ((redStudents.length > 0) && (yellowStudents.length = 0) && (greenStudents.length > 0)) {
+      else if ((redStudents.length > 0) && (yellowStudents.length === 0) && (greenStudents.length > 0)) {
 
         if (num === 3 || num === 0 || num === 1 || num === 2 || num === 4) {
           return window.alert(redStudents[redrandomNumber].name)
@@ -72,7 +72,7 @@ class AskQuestionButton extends PureComponent {
         }
       }
 
-      if ((redStudents.length > 0) && (yellowStudents.length > 0) && (greenStudents.length = 0)) {
+      else if ((redStudents.length > 0) && (yellowStudents.length > 0) && (greenStudents.length === 0)) {
 
         if (num === 3 || num === 0 || num === 1 || num === 2) {
           return window.alert(redStudents[redrandomNumber].name)
@@ -82,19 +82,19 @@ class AskQuestionButton extends PureComponent {
         }
       }
 
-      if ((redStudents.length > 0) && (yellowStudents.length = 0) && (greenStudents.length = 0)) {
+      else if ((redStudents.length > 0) && (yellowStudents.length === 0) && (greenStudents.length === 0)) {
         return window.alert(redStudents[redrandomNumber].name)
       }
 
-      if ((redStudents.length = 0) && (yellowStudents.length > 0) && (greenStudents.length = 0)) {
+      else if ((redStudents.length === 0) && (yellowStudents.length > 0) && (greenStudents.length === 0)) {
         return window.alert(yellowStudents[yellowrandomNumber].name)
       }
 
-      if ((redStudents.length = 0) && (yellowStudents.length = 0) && (greenStudents.length > 0)) {
+      else if ((redStudents.length === 0) && (yellowStudents.length === 0) && (greenStudents.length > 0)) {
         return window.alert(greenStudents[greenrandomNumber].name)
       }
 
-      if ((redStudents.length = 0) && (yellowStudents.length = 0) && (greenStudents.length = 0)) {
+      else if ((redStudents.length === 0) && (yellowStudents.length === 0) && (greenStudents.length === 0)) {
         return window.alert("There are no students in this batch, add students first!")
       }
 

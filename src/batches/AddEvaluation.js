@@ -87,6 +87,38 @@ class AddEvaluation extends PureComponent {
     }
   }
 
+  savenextEvaluation() {
+    const {
+      day,
+      color,
+      remark,
+    } = this.state
+
+    const evaluation = {
+      day,
+      color,
+      remark,
+    }
+
+    const { currentBatch } = this.props
+    const { students } = currentBatch
+    const url = this.props.routing.locationBeforeTransitions.pathname
+    const studentid = url.split('/').pop()
+    const thisStudent = students.filter((student) => (student._id.toString() === studentid))
+    const indexstudent = students.filter((student, index) => {
+      if (student._id.toString() === studentid) {
+      return index
+      }
+    })
+
+    console.log(thisStudent)
+    console.log(indexstudent)
+
+    if (this.validate(evaluation)) {
+      this.props.addEvaluation(currentBatch._id, evaluation)
+    }
+  }
+
   render() {
     const { errors } = this.state
 
@@ -119,14 +151,16 @@ class AddEvaluation extends PureComponent {
 
         <div className="actions">
           <button className="primary" onClick={this.saveEvaluation.bind(this)}>Save</button>
+          <button className="primary" onClick={this.savenextEvaluation.bind(this)}>Save & Next</button>
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ currentUser, currentBatch}, { params }) => ({
+const mapStateToProps = ({ currentUser, currentBatch, routing}) => ({
   signedIn: !!currentUser && !!currentUser._id,
   currentBatch,
+  routing
 })
 export default connect(mapStateToProps, { addEvaluation, showError })(AddEvaluation)
