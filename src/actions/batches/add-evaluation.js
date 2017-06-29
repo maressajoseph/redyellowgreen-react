@@ -1,3 +1,4 @@
+import { history } from '../../store'
 import API from '../../api'
 import {
   APP_LOADING,
@@ -28,6 +29,7 @@ export default (_id, evaluation) => {
               type: ADD_EVALUATION,
               payload: result
             })
+            history.replace(`/batches/${_id}`)
           })
           .catch((error) => {
             dispatch({ type: APP_DONE_LOADING })

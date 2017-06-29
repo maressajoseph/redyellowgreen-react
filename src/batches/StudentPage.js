@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import getCurrentBatch from '../actions/batches/get'
 import AddEvaluation from './AddEvaluation'
+import DeleteStudent from '../components/DeleteStudentButton'
 
 export class StudentPage extends PureComponent {
   static propTypes = {
@@ -38,6 +39,7 @@ export class StudentPage extends PureComponent {
       <article className="student page">
         <main>
           <h3>{student.name}</h3>
+          <DeleteStudent />
           <img src={student.photo} />
           <p>Evaluation history: </p>
           {student.evaluation.map(this.renderEvaluations.bind(this))}
