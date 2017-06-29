@@ -1,3 +1,4 @@
+import { history } from '../../store'
 import API from '../../api'
 import {
   APP_LOADING,
@@ -10,7 +11,7 @@ export const ADD_NEXT_EVALUATION = 'ADD_NEXT_EVALUATION'
 
 const api = new API()
 
-export default (_id, evaluation) => {
+export default (_id, evaluation, studentid) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
@@ -19,7 +20,7 @@ export default (_id, evaluation) => {
     api.app.authenticate()
       .then(() => {
 
-        backend.patch(_id, evaluation)
+        backend.patch(_id, { addevaluation: evaluation })
           .then((result) => {
             dispatch({ type: APP_DONE_LOADING })
             dispatch({ type: LOAD_SUCCESS })
@@ -28,6 +29,7 @@ export default (_id, evaluation) => {
               type: ADD_NEXT_EVALUATION,
               payload: result
             })
+          history.replace(`/batches/${_id}/${studentid}`)
 
           })
           .catch((error) => {

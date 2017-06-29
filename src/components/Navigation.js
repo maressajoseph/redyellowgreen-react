@@ -28,7 +28,7 @@ class Navigation extends PureComponent {
     const { signedIn, signOut } = this.props
     return (
       <AppBar
-        title="REDYELLOWGREEN"
+        title={<p onClick={this.goHome}>REDYELLOWGREEN</p>}
         iconElementLeft={<IconButton onClick={this.goHome}><Heart /></IconButton>}
         iconElementRight={signedIn ?
           <FlatButton label="Sign out" onClick={signOut} /> :

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import moment from 'moment'
 import AskQuestionButton from '../components/AskQuestionButton'
 import AddStudentButton from '../components/AddStudentButton'
 import getCurrentBatch from '../actions/batches/get'
@@ -73,8 +74,8 @@ export class BatchPage extends PureComponent {
         <header>
           <h1>Batch: { number } </h1>
           <div className='redbar'></div>{redper}%<div className='yellowbar'></div>{yellowper}%<div className='greenbar'></div>{greenper}%
-          <p className="starts">Starts: { starts }</p>
-          <p className="ends">Ends: { ends }</p>
+          <p className="starts">Start date: { moment(starts).format('DD-MM-YYYY') }</p>
+          <p className="ends">End date: { moment(ends).format('DD-MM-YYYY') }</p>
         </header>
         <main>
           {students.map(this.renderStudents.bind(this))}

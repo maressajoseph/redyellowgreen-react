@@ -120,12 +120,8 @@ class AddEvaluation extends PureComponent {
 
     const nextStudent = nextStudents()
 
-    console.log(nextStudent)
-    console.log(nextStudent._id)
-
     if (this.validate(evaluation)) {
-      this.props.addNextEvaluation(currentBatch._id, evaluation)
-      history.push(`/batches/${currentBatch._id}/${nextStudent._id}`)
+      this.props.addNextEvaluation(currentBatch._id, evaluation, nextStudent._id)
     }
   }
 

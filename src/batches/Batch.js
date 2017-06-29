@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import moment from 'moment'
 
 export class Batch extends PureComponent {
   static propTypes = {
@@ -27,8 +28,8 @@ export class Batch extends PureComponent {
           <h1>
             <Link to={`/batches/${_id}`}>Batch { number }</Link>
           </h1>
-          <p className="starts">Starts: { starts }</p>
-          <p className="ends">Ends: { ends }</p>
+          <p className="starts">Start date: { moment(starts).format('DD-MM-YYYY') }</p>
+          <p className="ends">End date: { moment(ends).format('DD-MM-YYYY') }</p>
         </header>
       </article>
     )
