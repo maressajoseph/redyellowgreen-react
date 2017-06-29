@@ -7,11 +7,11 @@ import {
   LOAD_SUCCESS
 } from '../loading'
 
-export const ADD_STUDENT = 'ADD_STUDENT'
+export const ADD_EVALUATION = 'ADD_EVALUATION'
 
 const api = new API()
 
-export default (_id, student) => {
+export default (_id, evaluation) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
@@ -20,13 +20,13 @@ export default (_id, student) => {
     api.app.authenticate()
       .then(() => {
 
-        backend.patch(_id, student)
+        backend.patch(_id, evaluation)
           .then((result) => {
             dispatch({ type: APP_DONE_LOADING })
             dispatch({ type: LOAD_SUCCESS })
 
             dispatch({
-              type: ADD_STUDENT,
+              type: ADD_EVALUATION,
               payload: result
             })
             history.replace(`/batches/${_id}`)

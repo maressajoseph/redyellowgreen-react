@@ -1,3 +1,4 @@
+import { history } from '../../store'
 import API from '../../api'
 import {
   APP_LOADING,
@@ -18,6 +19,9 @@ export default (newBatch) => {
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
+
+        history.replace('/')
+
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })

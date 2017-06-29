@@ -1,23 +1,17 @@
 .red {
-  height: 7px;
-  width: 7px;
+  height: 20px;
+  width: 20px;
   background-color: red;
   border-radius: 50%; }
 
 .yellow {
   background-color: yellow;
-  height: 7px;
-  width: 7px;
+  height: 20px;
+  width: 20px;
   border-radius: 50%; }
 
 .green {
   background-color: green;
-  height: 7px;
-  width: 7px;
-  border-radius: 50%; }
-
-.grey {
-  background-color: grey;
-  height: 7px;
-  width: 7px;
+  height: 20px;
+  width: 20px;
   border-radius: 50%; }

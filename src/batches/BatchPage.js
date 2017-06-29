@@ -18,7 +18,7 @@ export class BatchPage extends PureComponent {
 
   componentWillMount() {
     const { _id } = this.props
-    const { getCurrentBatch } = this.props
+    const { getCurrentBatch, currentBatch } = this.props
     getCurrentBatch(_id)
   }
 
@@ -26,9 +26,9 @@ export class BatchPage extends PureComponent {
     const { _id } = this.props
     return (
       <div key={index} className="student">
-        {student.name && <h3><Link to ={`/batches/${_id}/students/${student._id}`}>{student.name}</Link></h3>}
-        {student.photo && <Link to ={`/batches/${_id}/students/${student._id}`}><img src={student.photo} /></Link>}
-        {student.evaluation[student.evaluation.length-1].color && <div className={`red${student.evaluation[student.evaluation.length-1].color === 'Red' ? '' : (student.evaluation[student.evaluation.length-1].color === 'Yellow' ? 'orange': 'green')}`}></div>}
+        <h3><Link to ={`/batches/${_id}/${student._id}`}>{student.name}</Link></h3>
+        {student.photo && <Link to ={`/batches/${_id}/${student._id}`}><img src={student.photo} /></Link>}
+        {student.evaluation[0] === undefined ? (<div className="grey"></div>) : (<div className={`${student.evaluation[student.evaluation.length-1].color === 'Red' ? 'red' : (student.evaluation[student.evaluation.length-1].color === 'Yellow' ? 'yellow': 'green')}`}></div>)}
       </div>
     )
   }
@@ -61,7 +61,7 @@ export class BatchPage extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ batches, currentBatch }, { params }) => {
+const mapStateToProps = ({ batches, currentBatch, currentUser }, { params }) => {
 
   const batch = batches.reduce((prev, next) => {
     if (next._id === params.batchId) {

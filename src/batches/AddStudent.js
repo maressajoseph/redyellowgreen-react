@@ -2,23 +2,22 @@ import React, { PureComponent } from 'react'
 import Editor from 'react-medium-editor'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
-import createBatch from '../actions/batches/create'
+import { push } from 'react-router-redux'
+import PropTypes from 'prop-types'
+import addStudent from '../actions/batches/add-student'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
-import './AddBatch.css'
 
-class AddBatch extends PureComponent {
+class AddStudent extends PureComponent {
   constructor(props) {
     super()
 
-    const { number, starts, ends, students } = props
+    const { name, photo } = props
 
     this.state = {
-      number,
-      starts,
-      ends,
-      students,
+      name,
+      photo,
       errors: {},
     }
   }
@@ -32,37 +31,29 @@ class AddBatch extends PureComponent {
   }
 
 
-updateEnds(event) {
-  event.preventDefault()
-  this.setState({
-    ends: this.refs.ends.value
-  })
-}
-
-
-updateStarts(event) {
-  event.preventDefault()
-  this.setState({
-    starts: this.refs.starts.value
-  })
-}
-
-  updateNumber(event) {
+  updateStudentName(event) {
     event.preventDefault()
     this.setState({
-      number: this.refs.number.value
+      name: this.refs.studentname.value
     })
   }
 
 
-  validate(batch) {
-    const { number, starts, ends } = batch
+  updatePhoto(event) {
+    event.preventDefault()
+    this.setState({
+      photo: this.refs.photo.value
+    })
+  }
+
+
+  validate(student) {
+    const { name, photo } = student
 
     let errors = {}
 
-    if (!number || number === '') errors.number = "Please add the number of this batch"
-    if (!starts || starts === '') errors.starts = 'The batch needs a starting date'
-    if (!ends || ends === '') errors.ends = 'The batch needs an end date!'
+    if (!name || name === '') errors.number = "Please add a name of the student"
+    if (!photo || photo === '') errors.starts = 'Please add a f=photo of the student'
 
     this.setState({
       errors,
@@ -71,23 +62,21 @@ updateStarts(event) {
     return Object.keys(errors).length === 0
   }
 
-  saveBatch() {
+  saveStudent() {
     const {
-      number,
-      starts,
-      ends,
-      students
+      name,
+      photo
     } = this.state
 
-    const batch = {
-      number,
-      starts,
-      ends,
-      students
+    const student = {
+      name,
+      photo
     }
+    const { currentBatch, push } = this.props
 
-    if (this.validate(batch)) {
-      this.props.createBatch(batch)
+    if (this.validate(student)) {
+      this.props.addStudent(currentBatch._id, student)
+      push(`/batches/${currentBatch._id}`)
     }
   }
 
@@ -98,43 +87,32 @@ updateStarts(event) {
       <div className="editor">
         <input
           type="text"
-          ref="number"
-          className="number"
-          placeholder="Batch Number"
-          defaultValue={this.state.number}
-          onChange={this.updateNumber.bind(this)} />
+          ref="studentname"
+          className="studentname"
+          placeholder="Student Name"
+          onChange={this.updateStudentName.bind(this)} />
 
-        { errors.title && <p className="error">{ errors.number }</p> }
-
-        <input
-          type="date"
-          ref="starts"
-          className="starts"
-          placeholder="Start date of this batch"
-          defaultValue={this.state.starts}
-          onChange={this.updateStarts.bind(this)} />
-
-        { errors.starts && <p className="error">{ errors.starts }</p> }
+        { errors.students && <p className="error">{ errors.students }</p> }
 
         <input
-          type="date"
-          ref="ends"
-          className="ends"
-          placeholder="End date of this batch"
-          defaultValue={this.state.ends}
-          onChange={this.updateEnds.bind(this)} />
+            type="text"
+            ref="photo"
+            className="photo"
+            placeholder="Photo URL"
+            onChange={this.updatePhoto.bind(this)} />
 
-        { errors.ends && <p className="error">{ errors.ends }</p> }
+          { errors.photo && <p className="error">{ errors.photo }</p> }
 
         <div className="actions">
-          <button className="primary" onClick={this.saveBatch.bind(this)}>Save</button>
+          <button className="primary" onClick={this.saveStudent.bind(this)}>Save</button>
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ currentUser }) => ({
+const mapStateToProps = ({ currentUser, currentBatch }) => ({
   signedIn: !!currentUser && !!currentUser._id,
+  currentBatch
 })
-export default connect(mapStateToProps, { createBatch, replace, showError })(AddBatch)
+export default connect(mapStateToProps, { addStudent, replace, showError, push })(AddStudent)
