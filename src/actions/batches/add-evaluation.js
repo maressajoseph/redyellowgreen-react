@@ -29,6 +29,7 @@ export default (_id, evaluation) => {
               type: ADD_EVALUATION,
               payload: result
             })
+            console.log(result)
             history.replace(`/batches/${_id}`)
           })
           .catch((error) => {

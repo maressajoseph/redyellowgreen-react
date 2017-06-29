@@ -21,3 +21,18 @@
   height: 7px;
   width: 7px;
   border-radius: 50%; }
+
+.redbar {
+  background-color: red;
+  height: 15px;
+  width: 15px; }
+
+.yellowbar {
+  background-color: yellow;
+  height: 15px;
+  width: 15px; }
+
+.greenbar {
+  background-color: green;
+  height: 15px;
+  width: 15px; }

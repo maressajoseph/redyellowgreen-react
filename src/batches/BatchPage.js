@@ -24,6 +24,7 @@ export class BatchPage extends PureComponent {
 
   renderStudents(student, index) {
     const { _id } = this.props
+
     return (
       <div key={index} className="student">
         <h3><Link to ={`/batches/${_id}/${student._id}`}>{student.name}</Link></h3>
@@ -42,12 +43,36 @@ export class BatchPage extends PureComponent {
       students,
     } = this.props
 
+    var reds = 0
+    var yellows = 0
+    var greens = 0
+
+    students.map((student) => {
+
+      if (student.evaluation[0] !== undefined) {
+        if (student.evaluation[student.evaluation.length-1].color === 'Red') {
+          reds ++
+        }
+      if (student.evaluation[student.evaluation.length-1].color === 'Yellow') {
+          yellows ++
+        }
+      if (student.evaluation[student.evaluation.length-1].color === 'Green') {
+          greens ++
+        }
+      }
+    })
+
+    var redper = (reds / students.length * 100)
+    var yellowper = (yellows / students.length * 100)
+    var greenper = (greens / students.length * 100)
+
     if (!_id) return null
 
     return(
       <article className="batch page">
         <header>
           <h1>Batch: { number } </h1>
+          <div className='redbar'></div>{redper}%<div className='yellowbar'></div>{yellowper}%<div className='greenbar'></div>{greenper}%
           <p className="starts">Starts: { starts }</p>
           <p className="ends">Ends: { ends }</p>
         </header>
