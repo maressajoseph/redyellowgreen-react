@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import getCurrentBatch from '../actions/batches/get'
 import AddEvaluation from './AddEvaluation'
 import DeleteStudent from '../components/DeleteStudentButton'
@@ -40,6 +41,9 @@ export class StudentPage extends PureComponent {
         <main>
           <h3>{student.name}</h3>
           <DeleteStudent />
+          <button className="EditStudentButton">
+            <Link to={`/edit-student/${student._id}`}>Edit student</Link>
+          </button>
           <img src={student.photo} />
           <p>Evaluation history: </p>
           {student.evaluation.map(this.renderEvaluations.bind(this))}

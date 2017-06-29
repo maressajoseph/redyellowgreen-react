@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
 import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
-import addStudent from '../actions/batches/add-student'
+import editStudent from '../actions/batches/edit-student'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
 
-class AddStudent extends PureComponent {
+class EditStudent extends PureComponent {
   constructor(props) {
     super()
 
@@ -72,10 +72,10 @@ class AddStudent extends PureComponent {
       name,
       photo
     }
-    const { currentBatch, push } = this.props
+    const { currentBatch } = this.props
 
     if (this.validate(student)) {
-      this.props.addStudent(currentBatch._id, student)
+      this.props.editStudent(currentBatch._id, student)
     }
   }
 
@@ -110,8 +110,8 @@ class AddStudent extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser, currentBatch }) => ({
+const mapStateToProps = ({ currentUser, currentBatch }, { params }) => ({
   signedIn: !!currentUser && !!currentUser._id,
   currentBatch
 })
-export default connect(mapStateToProps, { addStudent, replace, showError, push })(AddStudent)
+export default connect(mapStateToProps, { editStudent, replace, showError })(EditStudent)

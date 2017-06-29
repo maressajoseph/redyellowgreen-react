@@ -12,6 +12,7 @@ import BatchPage from './batches/BatchPage'
 import StudentPage from './batches/StudentPage'
 import AddBatch from './batches/AddBatch'
 import AddStudent from './batches/AddStudent'
+import EditStudent from './batches/EditStudent'
 import './index.css'
 
 injectTapEventPlugin()
@@ -26,6 +27,7 @@ ReactDOM.render(
         <Route path="/batches/:batchId/:studentId" component={StudentPage} />
         <Route path="/create-batch" component={AddBatch} />
         <Route path="/add-student" component={AddStudent} />
+        <Route path="/edit-student/:studentId" component={EditStudent} />
         <Route path="/sign-in" component={SignIn} />
       </Route>
     </Router>
