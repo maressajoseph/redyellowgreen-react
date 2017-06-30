@@ -7,7 +7,6 @@ import ContentAdd from 'material-ui/svg-icons/content/add'
 import { history } from '../store'
 
 const style = {
-  marginLeft: 500,
   marginTop: 20,
 }
 

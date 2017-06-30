@@ -4,6 +4,8 @@ import { Link } from 'react-router'
 import PropTypes from 'prop-types'
 import AddIcon from 'material-ui/svg-icons/social/person-add'
 import RaisedButton from 'material-ui/RaisedButton'
+import { history } from '../store'
+import './AddStudentButton.css'
 
 
 class AddStudentButton extends PureComponent {
@@ -11,14 +13,16 @@ class AddStudentButton extends PureComponent {
     signedIn: PropTypes.bool,
   }
 
+  goAddStudent = () => {
+    history.push('/add-student')
+  }
+
 
   render() {
     const { signedIn } = this.props
     if (signedIn)
       return (
-          <RaisedButton className="AddStudentButton" icon={<AddIcon/>}>
-            <Link to={'/add-student'}>Add student</Link>
-          </RaisedButton>
+        <RaisedButton primary={true} className="AddStudentButton" icon={<AddIcon/>} onClick={this.goAddStudent} />
       )
       else {
         return null

@@ -4,10 +4,13 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Avatar from 'material-ui/Avatar'
 import List from 'material-ui/List/List'
+import RaisedButton from 'material-ui/RaisedButton'
 import ListItem from 'material-ui/List/ListItem'
 import getCurrentBatch from '../actions/batches/get'
 import AddEvaluation from './AddEvaluation'
+import { history } from '../store'
 import DeleteStudent from '../components/DeleteStudentButton'
+import './StudentPage.css'
 
 export class StudentPage extends PureComponent {
   static propTypes = {
@@ -24,7 +27,7 @@ export class StudentPage extends PureComponent {
   renderEvaluations(evaluation, index) {
     return (
       <div key={index} className="evaluation">
-        <div className={`${evaluation.color === 'Red' ? 'red' : (evaluation.color === 'Yellow' ? 'yellow' : 'green')}`}></div>
+        <div className={`${evaluation.color === 'Red' ? 'red1' : (evaluation.color === 'Yellow' ? 'yellow1' : 'green1')}`}>{'\u2605'}</div>
       </div>
     )
   }
@@ -37,20 +40,29 @@ export class StudentPage extends PureComponent {
 
     const student = students.find((student) => (student._id === this.props.params.studentId))
 
+    const goToEdit = () => {
+      history.push(`/edit-student/${student._id}`)
+    }
+
+    const goToEditEva = () => {
+      history.push(`/edit-evaluation/${student._id}`)
+    }
+
     if (!_id) return null
 
     return(
-      <article className="student page">
-        <main>
-          <Avatar src={student.photo} />
-          <h2>{student.name}</h2>
+      <article className="student-page">
+        <header>
+          <Avatar size={100} className="avatar" src={student.photo} />
+          <div className="stars">
+            {student.evaluation.map(this.renderEvaluations.bind(this))}
+          </div>
+          <h2 className="studentname">{student.name}</h2><br />
           <DeleteStudent />
-          <button className="EditStudentButton">
-            <Link to={`/edit-student/${student._id}`}>Edit student</Link>
-          </button>
-          <p>Evaluation history: </p>
-          {student.evaluation.map(this.renderEvaluations.bind(this))}
-          <Link to={`/edit-evaluation/${student._id}`}>Edit your last evaluation</Link>
+          <RaisedButton className="EditStudentButton" primary={true} onClick={goToEdit} label="Edit student" />
+          <RaisedButton className="EditEvaluationButton" primary={true} onClick={goToEditEva} label="Edit your last evaluation" />
+        </header><br />
+        <main>
           <AddEvaluation />
         </main>
       </article>

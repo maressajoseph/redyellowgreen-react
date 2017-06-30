@@ -5,6 +5,7 @@ import fetchBatches from '../actions/batches/fetch'
 import Batch from './Batch'
 import subscribeToBatchesService from '../actions/batches/subscribe'
 import CreateBatchButton from '../components/CreateBatchButton'
+import './AllBatches.css'
 
 
 export class AllBatches extends PureComponent {
@@ -37,15 +38,19 @@ export class AllBatches extends PureComponent {
         </div>
       )
     }
-    return null
+    return (
+      <div>
+        <h1 className="welcome">Welcome to REDYELLOWGREEN</h1>
+        <h2 className="welcome">Please sign in to continue</h2>
+      </div>
+    )
   }
 }
 
 const mapStateToProps = ({ currentUser, currentBatch, batches, subscriptions }) => ({
   signedIn: (!!currentUser && !!currentUser._id),
   currentBatch,
-  batches,
-  subscribed: subscriptions.includes('batches') })
+  batches })
 
 export default connect(mapStateToProps, {
   fetchBatches, subscribeToBatchesService

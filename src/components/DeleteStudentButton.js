@@ -22,7 +22,7 @@ class DeleteStudentButton extends PureComponent {
     const { signedIn } = this.props
     if (signedIn)
       return (
-          <RaisedButton onClick={ this.byeStudent.bind(this) } icon={<DeleteIcon/>} label="Delete this student"/>
+          <RaisedButton primary={true} onClick={ this.byeStudent.bind(this) } icon={<DeleteIcon/>} />
       )
       else {
         return null

@@ -14,8 +14,7 @@ const dialogStyle = {
 }
 
 const buttonStyle = {
-  float: 'right',
-  marginLeft: '2rem',
+  marginLeft: 120,
 }
 
 export class SignIn extends PureComponent {
@@ -54,7 +53,7 @@ export class SignIn extends PureComponent {
           </div>
           <div className="input">
             <TextField ref="password" type="password" hintText="Password"  />
-          </div>
+          </div><br />
           <RaisedButton
             style={ buttonStyle }
             onClick={ this.submitForm.bind(this) }

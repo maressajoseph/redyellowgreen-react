@@ -1,11 +1,11 @@
 .red {
-  color: red; }
+  color: #ff2a2a; }
 
 .yellow {
-  color: yellow; }
+  color: #ffcc50; }
 
 .green {
-  color: green; }
+  color: #3ab227; }
 
 .grey {
   color: grey; }
@@ -15,17 +15,17 @@
   text-align: center; }
 
 .redbar {
-  color: red;
+  color: #ff2a2a;
   font-size: 25px;
   flex: 1; }
 
 .yellowbar {
-  color: yellow;
+  color: #ffcc50;
   font-size: 25px;
   flex: 1; }
 
 .greenbar {
-  color: green;
+  color: #3ab227;
   font-size: 25px;
   flex: 1; }
 
@@ -39,3 +39,9 @@
 
 .dates {
   text-align: center; }
+
+.askquestion {
+  font-size: 25px; }
+
+.list {
+  font-family: Raleway; }

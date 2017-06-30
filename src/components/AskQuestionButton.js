@@ -2,12 +2,25 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import RaisedButton from 'material-ui/RaisedButton'
-import StartIcon from 'material-ui/svg-icons/av/play-circle-filled'
+import StarIcon from 'material-ui/svg-icons/action/help'
+import Dialog from 'material-ui/Dialog';
 
 
 class AskQuestionButton extends PureComponent {
   static propTypes = {
     batch: PropTypes.object
+  }
+
+  state = {
+    open: false,
+  }
+
+  handleOpen = () => {
+    this.setState({open: true})
+  };
+
+  handleClose = () => {
+    this.setState({open: false})
   }
 
   randomStudent = () => {
@@ -36,6 +49,14 @@ class AskQuestionButton extends PureComponent {
     const greenrandomNumber = Math.floor(Math.random()*(greenStudents.length))
 
     const num = Math.floor(Math.random()*6)
+
+    const whattodo = [
+      <RaisedButton
+        label="Ok"
+        primary={true}
+        onTouchTap={this.handleClose}
+      />
+    ]
 
     const algorithm = () => {
 
@@ -105,7 +126,9 @@ class AskQuestionButton extends PureComponent {
 
   render() {
       return (
-        <RaisedButton onClick={ this.randomStudent.bind(this) } icon={<StartIcon/>} label="Ask a question"/>
+        <div>
+          <StarIcon primary={true} onClick={ this.randomStudent.bind(this) } onTouchTap={this.handleOpen} />
+       </div>
       )
   }
 }

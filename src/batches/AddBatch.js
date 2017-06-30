@@ -2,23 +2,12 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
 import DatePicker from 'material-ui/DatePicker'
+import RaisedButton from 'material-ui/RaisedButton'
 import createBatch from '../actions/batches/create'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
 import './AddBatch.css'
-
-const Calendarstart = () => (
-  <div>
-    <DatePicker hintText="Start date of the batch" okLabel="Pick date" container="inline" onChange={(x, event) => this.updateStarts(x, event)} />
-  </div>
-)
-
-const Calendarend = () => (
-  <div>
-    <DatePicker hintText="End date of the batch" okLabel="Pick date" container="inline" onChange={(x, event) => this.updateEnds(x, event)} />
-  </div>
-)
 
 class AddBatch extends PureComponent {
   constructor(props) {
@@ -104,8 +93,6 @@ updateStarts(event, x) {
   render() {
     const { errors } = this.state
 
-    console.log(Calendarstart)
-
     return (
       <div className="editor">
         <input
@@ -126,7 +113,7 @@ updateStarts(event, x) {
         { errors.ends && <p className="error">{ errors.ends }</p> }
 
         <div className="actions">
-          <button className="primary" onClick={this.saveBatch.bind(this)}>Save</button>
+          <RaisedButton primary={true} onClick={this.saveBatch.bind(this)} label="Save" />
         </div>
       </div>
     )
