@@ -53,7 +53,7 @@ export class StudentPage extends PureComponent {
     return(
       <article className="student-page">
         <header>
-          <Avatar size={70} className="avatar" src={student.photo} />
+          <Avatar size={100} className="avatar" src={student.photo} />
           <div className="stars">
             {student.evaluation.map(this.renderEvaluations.bind(this))}
           </div>

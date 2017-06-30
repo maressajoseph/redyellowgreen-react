@@ -36,8 +36,8 @@ export class BatchPage extends PureComponent {
 
     return (
       <div key={index} className="student">
-        <ListItem onClick={gotoStudent} leftAvatar={<Avatar src={student.photo} />}>
-          {student.name} {student.evaluation[0] === undefined ? (<div className="grey">{'\u2605'}</div>) : (<div className={`${student.evaluation[student.evaluation.length-1].color === 'Red' ? 'red' : (student.evaluation[student.evaluation.length-1].color === 'Yellow' ? 'yellow': 'green')}`}>{'\u2605'}</div>)}
+        <ListItem onClick={gotoStudent} className="list" leftAvatar={<Avatar size={50} src={student.photo} />}>
+          {student.name}{student.evaluation[0] === undefined ? (<div className="grey">{'\u2605'}</div>) : (<div className={`${student.evaluation[student.evaluation.length-1].color === 'Red' ? 'red' : (student.evaluation[student.evaluation.length-1].color === 'Yellow' ? 'yellow': 'green')}`}>{'\u2605'}</div>)}
         </ListItem>
       </div>
     )

@@ -9,18 +9,6 @@ import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
 import './AddBatch.css'
 
-const Calendarstart = () => (
-  <div>
-    <DatePicker hintText="Start date of the batch" okLabel="Pick date" container="inline" onChange={(x, event) => this.updateStarts(x, event)} />
-  </div>
-)
-
-const Calendarend = () => (
-  <div>
-    <DatePicker hintText="End date of the batch" okLabel="Pick date" container="inline" onChange={(x, event) => this.updateEnds(x, event)} />
-  </div>
-)
-
 class AddBatch extends PureComponent {
   constructor(props) {
     super()
@@ -104,8 +92,6 @@ updateStarts(event, x) {
 
   render() {
     const { errors } = this.state
-
-    console.log(Calendarstart)
 
     return (
       <div className="editor">

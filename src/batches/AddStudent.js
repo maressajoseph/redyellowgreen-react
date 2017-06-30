@@ -7,6 +7,7 @@ import addStudent from '../actions/batches/add-student'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
+import './AddStudent.css'
 
 class AddStudent extends PureComponent {
   constructor(props) {
