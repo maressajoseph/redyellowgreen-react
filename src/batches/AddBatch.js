@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
 import DatePicker from 'material-ui/DatePicker'
+import RaisedButton from 'material-ui/RaisedButton'
 import createBatch from '../actions/batches/create'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
@@ -126,7 +127,7 @@ updateStarts(event, x) {
         { errors.ends && <p className="error">{ errors.ends }</p> }
 
         <div className="actions">
-          <button className="primary" onClick={this.saveBatch.bind(this)}>Save</button>
+          <RaisedButton primary={true} onClick={this.saveBatch.bind(this)} label="Save" />
         </div>
       </div>
     )

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
 import { push } from 'react-router-redux'
+import RaisedButton from 'material-ui/RaisedButton'
 import addStudent from '../actions/batches/add-student'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
@@ -101,7 +102,7 @@ class AddStudent extends PureComponent {
           { errors.photo && <p className="error">{ errors.photo }</p> }
 
         <div className="actions">
-          <button className="primary" onClick={this.saveStudent.bind(this)}>Save</button>
+          <RaisedButton primary={true} onClick={this.saveStudent.bind(this)} label="Save" />
         </div>
       </div>
     )

@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { history } from '../store'
+import DatePicker from 'material-ui/DatePicker'
+import RaisedButton from 'material-ui/RaisedButton'
 import addEvaluation from '../actions/batches/add-evaluation'
 import addNextEvaluation from '../actions/batches/addnext-evaluation'
 import { showError } from '../actions/loading'
@@ -36,9 +38,9 @@ class AddEvaluation extends PureComponent {
   }
 
 
-  updateDay(event) {
+  updateDay(event, x) {
     this.setState({
-      day: this.refs.day.value
+      day: x
     })
   }
 
@@ -130,12 +132,7 @@ class AddEvaluation extends PureComponent {
 
     return (
       <div className="editor">
-        <input
-          type="date"
-          ref="day"
-          className="day"
-          placeholder="Day of the evaluation"
-          onChange={this.updateDay.bind(this)} /><br />
+        <DatePicker hintText="Day of evaluation" okLabel="Pick date" container="inline" onChange={(event, x) => this.updateDay(event, x)} />
 
         { errors.day && <p className="error">{ errors.day }</p> }
 
@@ -154,8 +151,8 @@ class AddEvaluation extends PureComponent {
             onChange={this.updateRemark.bind(this)} />
 
         <div className="actions">
-          <button className="primary" onClick={this.saveEvaluation.bind(this)}>Save</button>
-          <button className="primary" onClick={this.savenextEvaluation.bind(this)}>Save & Next</button>
+          <RaisedButton className="primary" primary={true} onClick={this.saveEvaluation.bind(this)} label="Save" />
+          <RaisedButton className="primary" primary={true} onClick={this.savenextEvaluation.bind(this)} label="Save & Next" />
         </div>
       </div>
     )

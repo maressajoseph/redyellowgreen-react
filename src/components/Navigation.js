@@ -5,7 +5,7 @@ import { push } from 'react-router-redux'
 import signOut from '../actions/user/sign-out'
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
-import Heart from 'material-ui/svg-icons/action/favorite-border'
+import Heart from 'material-ui/svg-icons/action/stars'
 import FlatButton from 'material-ui/FlatButton'
 
 class Navigation extends PureComponent {

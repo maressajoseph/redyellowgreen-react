@@ -1,16 +1,16 @@
-.red {
+.red1 {
   height: 20px;
   width: 20px;
   background-color: red;
   border-radius: 50%; }
 
-.yellow {
+.yellow1 {
   background-color: yellow;
   height: 20px;
   width: 20px;
   border-radius: 50%; }
 
-.green {
+.green1 {
   background-color: green;
   height: 20px;
   width: 20px;

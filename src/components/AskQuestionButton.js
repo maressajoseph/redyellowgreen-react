@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import RaisedButton from 'material-ui/RaisedButton'
-import StartIcon from 'material-ui/svg-icons/av/play-circle-filled'
+import StarIcon from 'material-ui/svg-icons/action/help'
 
 
 class AskQuestionButton extends PureComponent {
@@ -105,7 +105,7 @@ class AskQuestionButton extends PureComponent {
 
   render() {
       return (
-        <RaisedButton onClick={ this.randomStudent.bind(this) } icon={<StartIcon/>} label="Ask a question"/>
+        <StarIcon primary={true} onClick={ this.randomStudent.bind(this) } />
       )
   }
 }

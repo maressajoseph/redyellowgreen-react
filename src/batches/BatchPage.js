@@ -80,7 +80,7 @@ export class BatchPage extends PureComponent {
     return(
       <article className="batch-page">
         <header>
-          <h1 className="batchnumber">Batch number { number } </h1>
+          <h1 className="batchnumber">Batch number { number } <AskQuestionButton className='askquestion'/></h1>
           <p className="dates">{ moment(starts).format('Do MMMM YYYY') } - { moment(ends).format('Do MMMM YYYY') } </p>
           <div className="try">
             <div className='redbar'>{'\u2605'} {Math.floor(redper)}%</div><div className='yellowbar'>{'\u2605'} {Math.floor(yellowper)}%</div><div className='greenbar'>{'\u2605'} {Math.floor(greenper)}%</div>
@@ -91,7 +91,6 @@ export class BatchPage extends PureComponent {
         <main>
           {students.map(this.renderStudents.bind(this))}
         </main>
-        <AskQuestionButton />
         <AddStudentButton />
       </article>
     )
