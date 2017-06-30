@@ -26,9 +26,9 @@ export class StudentPage extends PureComponent {
 
   renderEvaluations(evaluation, index) {
     return (
-      <List key={index} className="evaluation">
-        <div className={`${evaluation.color === 'Red' ? 'red1' : (evaluation.color === 'Yellow' ? 'yellow1' : 'green1')}`}></div>
-      </List>
+      <div key={index} className="evaluation">
+        <div className={`${evaluation.color === 'Red' ? 'red1' : (evaluation.color === 'Yellow' ? 'yellow1' : 'green1')}`}>{'\u2605'}</div>
+      </div>
     )
   }
 
@@ -53,14 +53,16 @@ export class StudentPage extends PureComponent {
     return(
       <article className="student-page">
         <header>
-          <Avatar src={student.photo} />
-          <h2>{student.name}</h2>
+          <Avatar className="avatar" src={student.photo} />
+          <h2 className="studentname">{student.name}</h2>
+          <div className="stars">
+            {student.evaluation.map(this.renderEvaluations.bind(this))}
+          </div>
           <DeleteStudent />
           <RaisedButton className="EditStudentButton" primary={true} onClick={goToEdit} label="Edit student" />
-        </header>
-        <main>
-          {student.evaluation.map(this.renderEvaluations.bind(this))}
           <RaisedButton className="EditEvaluationButton" primary={true} onClick={goToEditEva} label="Edit your last evaluation" />
+        </header><br />
+        <main>
           <AddEvaluation />
         </main>
       </article>
