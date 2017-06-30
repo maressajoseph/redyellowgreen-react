@@ -53,11 +53,11 @@ export class StudentPage extends PureComponent {
     return(
       <article className="student-page">
         <header>
-          <Avatar className="avatar" src={student.photo} />
-          <h2 className="studentname">{student.name}</h2>
+          <Avatar size={70} className="avatar" src={student.photo} />
           <div className="stars">
             {student.evaluation.map(this.renderEvaluations.bind(this))}
           </div>
+          <h2 className="studentname">{student.name}</h2><br />
           <DeleteStudent />
           <RaisedButton className="EditStudentButton" primary={true} onClick={goToEdit} label="Edit student" />
           <RaisedButton className="EditEvaluationButton" primary={true} onClick={goToEditEva} label="Edit your last evaluation" />
